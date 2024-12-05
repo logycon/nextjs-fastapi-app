@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+*.md
+.env*
+venv
+.venv
+__pycache__
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+k8s
+*.log
+.DS_Store

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${APP_PROJECT_NAME}
+  namespace: ${APP_PROJECT_NAME}
+data:
+  NODE_ENV: "production"
+  NEXT_SHARP_PATH: "/app/node_modules/sharp"
+  NODE_OPTIONS: "--enable-source-maps --trace-warnings"
+  NEXT_TELEMETRY_DEBUG: "1"
+  DEBUG: "*"
+  APP_PROJECT_NAME: "${APP_PROJECT_NAME}"
+  APP_OLLAMA_HOST: "${APP_OLLAMA_HOST}"
+  APP_OLLAMA_PORT: "${APP_OLLAMA_PORT}"
+  APP_OLLAMA_MODEL: "${APP_OLLAMA_MODEL}"
+  
+  # Add other configuration variables here 

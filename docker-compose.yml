@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    image: ${PROJECT_NAME}:${VERSION:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: ${PROJECT_NAME}
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    environment:
+      - NODE_ENV=development
+      - PROJECT_NAME=${PROJECT_NAME}
+      - OLLAMA_HOST=${OLLAMA_HOST}
+      - OLLAMA_PORT=${OLLAMA_PORT}
+      - OLLAMA_MODEL=${OLLAMA_MODEL}

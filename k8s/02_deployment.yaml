@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_PROJECT_NAME}
+  namespace: ${APP_PROJECT_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APP_PROJECT_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_PROJECT_NAME}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: ${APP_PROJECT_NAME}
+          image: ${APP_REGISTRY}/${APP_PROJECT_NAME}:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: frontend
+            - containerPort: 8000
+              name: backend
+          envFrom:
+            - configMapRef:
+                name: ${APP_PROJECT_NAME}
+          env:
+            - name: NODE_OPTIONS
+              value: "--enable-source-maps --trace-warnings"
+            - name: NEXT_TELEMETRY_DEBUG
+              value: "1"
+            - name: DEBUG
+              value: "*"
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi" 
